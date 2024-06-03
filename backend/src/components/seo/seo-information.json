@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_seo_seo_informations",
+  "info": {
+    "displayName": "seoInformation",
+    "icon": "chartCircle"
+  },
+  "options": {},
+  "attributes": {
+    "seoTitle": {
+      "type": "string"
+    },
+    "seoDescription": {
+      "type": "text"
+    }
+  }
+}
