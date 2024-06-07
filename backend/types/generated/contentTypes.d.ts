@@ -362,45 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCommentComment extends Schema.CollectionType {
-  collectionName: 'comments';
-  info: {
-    singularName: 'comment';
-    pluralName: 'comments';
-    displayName: 'Comment';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    Content: Attribute.Text;
-    author: Attribute.Relation<
-      'api::comment.comment',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    blog: Attribute.Relation<
-      'api::comment.comment',
-      'manyToOne',
-      'api::post.post'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::comment.comment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::comment.comment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiPostPost extends Schema.CollectionType {
   collectionName: 'posts';
   info: {
@@ -425,11 +386,6 @@ export interface ApiPostPost extends Schema.CollectionType {
     cover: Attribute.Media;
     tags: Attribute.Relation<'api::post.post', 'oneToMany', 'api::tag.tag'>;
     seo: Attribute.Component<'seo.seo-information'>;
-    comments: Attribute.Relation<
-      'api::post.post',
-      'oneToMany',
-      'api::comment.comment'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -872,11 +828,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    comments: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::comment.comment'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -938,6 +889,249 @@ export interface PluginStrapiGoogleAuthGoogleCredential
   };
 }
 
+export interface PluginCommentManagerComment extends Schema.CollectionType {
+  collectionName: 'comments';
+  info: {
+    singularName: 'comment';
+    pluralName: 'comments';
+    displayName: 'Comment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    content: Attribute.Text;
+    author: Attribute.Relation<
+      'plugin::comment-manager.comment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    subcomments: Attribute.Relation<
+      'plugin::comment-manager.comment',
+      'oneToMany',
+      'plugin::comment-manager.subcomment'
+    >;
+    from_admin: Attribute.Boolean;
+    related_to: Attribute.Relation<
+      'plugin::comment-manager.comment',
+      'manyToOne',
+      'plugin::comment-manager.content-id'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::comment-manager.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::comment-manager.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginCommentManagerSubcomment extends Schema.CollectionType {
+  collectionName: 'subcomments';
+  info: {
+    singularName: 'subcomment';
+    pluralName: 'subcomments';
+    displayName: 'Subcomment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    content: Attribute.Text;
+    author: Attribute.Relation<
+      'plugin::comment-manager.subcomment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    parent_comment: Attribute.Relation<
+      'plugin::comment-manager.subcomment',
+      'manyToOne',
+      'plugin::comment-manager.comment'
+    >;
+    from_admin: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::comment-manager.subcomment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::comment-manager.subcomment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginCommentManagerContentId extends Schema.CollectionType {
+  collectionName: 'content_ids';
+  info: {
+    singularName: 'content-id';
+    pluralName: 'content-ids';
+    displayName: 'ContentID';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    slug: Attribute.String & Attribute.Unique;
+    comments: Attribute.Relation<
+      'plugin::comment-manager.content-id',
+      'oneToMany',
+      'plugin::comment-manager.comment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::comment-manager.content-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::comment-manager.content-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginRatingsReview extends Schema.CollectionType {
+  collectionName: 'reviews';
+  info: {
+    singularName: 'review';
+    pluralName: 'reviews';
+    displayName: 'Review';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    score: Attribute.Integer;
+    author: Attribute.Relation<
+      'plugin::ratings.review',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    comment: Attribute.Text;
+    related_to: Attribute.Relation<
+      'plugin::ratings.review',
+      'manyToOne',
+      'plugin::ratings.r-content-id'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::ratings.review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::ratings.review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginRatingsRContentId extends Schema.CollectionType {
+  collectionName: 'r_content_ids';
+  info: {
+    singularName: 'r-content-id';
+    pluralName: 'r-content-ids';
+    displayName: 'RContentID';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    reviews: Attribute.Relation<
+      'plugin::ratings.r-content-id',
+      'oneToMany',
+      'plugin::ratings.review'
+    >;
+    average: Attribute.Decimal;
+    slug: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::ratings.r-content-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::ratings.r-content-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -948,7 +1142,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::comment.comment': ApiCommentComment;
       'api::post.post': ApiPostPost;
       'api::tag.tag': ApiTagTag;
       'plugin::upload.file': PluginUploadFile;
@@ -960,6 +1153,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::strapi-google-auth.google-credential': PluginStrapiGoogleAuthGoogleCredential;
+      'plugin::comment-manager.comment': PluginCommentManagerComment;
+      'plugin::comment-manager.subcomment': PluginCommentManagerSubcomment;
+      'plugin::comment-manager.content-id': PluginCommentManagerContentId;
+      'plugin::ratings.review': PluginRatingsReview;
+      'plugin::ratings.r-content-id': PluginRatingsRContentId;
     }
   }
 }

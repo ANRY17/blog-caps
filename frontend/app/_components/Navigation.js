@@ -1,29 +1,65 @@
-import React from 'react';
+// components/Navigation.js
+'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function Navigation() {
+const Navigation = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
-    <nav className="bg-blue-600 p-4 text-white">
-      <div className="container mx-auto flex justify-between">
-        <div className="text-lg font-bold">Travel Blog</div>
-        <div>
-          <Link href="/" className="px-3 py-2 hover:bg-blue-700 rounded">
+    <nav className="bg-gray-800 p-4">
+      <ul className="flex space-x-4">
+        <li>
+          <Link href="/" className="text-white">
             Home
           </Link>
-          <Link
-            href="/blog"
-            className="px-3 py-2 hover:bg-blue-700 rounded ml-4"
-          >
+        </li>
+        <li>
+          <Link href="/blog" className="text-white">
             Blog
           </Link>
-          <Link
-            href="/profile"
-            className="px-3 py-2 hover:bg-blue-700 rounded ml-4"
-          >
-            profile
-          </Link>
-        </div>
-      </div>
+        </li>
+        {isLoggedIn ? (
+          <>
+            <li>
+              <Link href="/profile" className="text-white">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('token');
+                  window.location.href = '/login';
+                }}
+                className="text-white"
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link href="/login" className="text-white">
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link href="/register" className="text-white">
+                Register
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
     </nav>
   );
-}
+};
+
+export default Navigation;

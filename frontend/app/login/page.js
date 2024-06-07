@@ -1,7 +1,8 @@
-import AuthForm from '@/app/_components/AuthForm';
+// pages/login.js
+import AuthForm from '../_components/AuthForm';
 
-const LoginPage = () => {
-  return <AuthForm isLogin={true} />;
+const Login = () => {
+  return <AuthForm isLogin />;
 };
 
-export default LoginPage;
+export default Login;

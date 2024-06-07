@@ -1,7 +1,8 @@
-import AuthForm from '@/app/_components/AuthForm';
+// pages/register.js
+import AuthForm from '../_components/AuthForm';
 
-const RegisterPage = () => {
-  return <AuthForm isLogin={false} />;
+const Register = () => {
+  return <AuthForm />;
 };
 
-export default RegisterPage;
+export default Register;

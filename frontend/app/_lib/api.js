@@ -44,8 +44,30 @@ export async function getBlogBySlug(slug) {
       id: comment.id,
       content: comment.attributes.Content,
       createdAt: comment.attributes.createdAt,
+      author: comment.attributes.author
+        ? {
+            username: comment.attributes.author.username,
+            email: comment.attributes.author.email,
+            id: comment.attributes.author.id,
+          }
+        : null,
     })),
     seo: post.attributes.seo,
+  };
+}
+
+// Get Comments and Ratings by slug
+export async function getCommentsAndRatingsBySlug(slug) {
+  const commentsResponse = await fetchData(
+    `/api/comment-manager/comments/${slug}`
+  );
+  const ratingsResponse = await fetchData(`/api/ratings/reviews/${slug}`);
+
+  return {
+    comments: commentsResponse.comments || [],
+    reviews: ratingsResponse.reviews || [],
+    averageScore: ratingsResponse.averageScore || 0,
+    reviewsCount: ratingsResponse.reviewsCount || 0,
   };
 }
 
@@ -55,16 +77,14 @@ export function getCoverUrl(cover) {
   return coverUrl ? `${baseUrl}${coverUrl}` : null;
 }
 
-// Post Comment
-export async function postComment(blogId, content, token) {
+// Post Comment and Rating
+export async function postCommentAndRating(blogId, content, score, token) {
   const data = {
-    data: {
-      Content: content,
-      blog: blogId,
-    },
+    comment: content,
+    score: score,
   };
 
-  return await fetchData('/api/comments', {
+  return await fetchData(`/api/ratings/reviews/${blogId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
