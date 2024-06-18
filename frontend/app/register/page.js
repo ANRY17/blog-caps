@@ -1,8 +1,5 @@
-// pages/register.js
-import AuthForm from '../_components/AuthForm';
+import Register from '@/app/_components/Register';
 
-const Register = () => {
-  return <AuthForm />;
-};
-
-export default Register;
+export default function RegisterPage() {
+  return <Register />;
+}
