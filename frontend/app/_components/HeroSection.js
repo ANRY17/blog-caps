@@ -31,7 +31,6 @@ export default function HeroSection({ images }) {
             className="relative w-full h-full flex-shrink-0"
             style={{ backgroundColor: '#9ca3af' }}
           >
-            {/* Tambahkan loading="lazy" untuk lazy loading */}
             <Image
               src={image.src}
               layout="fill"
@@ -39,7 +38,6 @@ export default function HeroSection({ images }) {
               placeholder="empty"
               quality={80}
               alt={`Slide ${index + 1}`}
-              loading="lazy"
             />
           </div>
         ))}

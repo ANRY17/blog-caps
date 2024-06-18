@@ -14,9 +14,7 @@ export default async function BlogPage() {
     <main className="min-h-screen ">
       <HeroSection images={images} />
       <div className="container mx-auto py-10">
-        <h2 className="text-4xl font-bold text-center">
-          Activities for Everyone
-        </h2>
+        <h2 className="text-4xl font-bold text-center">Blogs</h2>
         <section className="px-4">
           <BlogClient
             initialBlogs={initialBlogs}

@@ -18,13 +18,8 @@ export default function BlogDetail({ blogData }) {
   return (
     <main className="min-h-screen bg-gray-100">
       {cover ? (
-        <div className="relative w-full h-64 md:h-custom-128 mb-6 mx-auto overflow-hidden rounded-lg shadow-lg">
-          <Image
-            src={cover}
-            alt={title}
-            layout="fill"
-            objectFit="cover"
-          />
+        <div className="relative w-full h-96 md:h-80 lg:h-96 mb-6 mx-auto overflow-hidden rounded-lg shadow-lg">
+          <Image src={cover} alt={title} layout="fill" objectFit="cover" />
         </div>
       ) : (
         <Skeleton height={384} />
@@ -32,7 +27,7 @@ export default function BlogDetail({ blogData }) {
 
       <section className="my-10 px-4">
         <div className="container mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-center text-gray-800">
             {title || <Skeleton width="80%" />}
           </h1>
           <div className="text-center text-gray-600 mb-6">

@@ -43,7 +43,7 @@ export default function BlogClient({ initialBlogs, initialPagination }) {
     <>
       <div className="container mx-auto py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {loading
-          ? Array.from({ length: 6 }).map((_, index) => (
+          ? Array.from({ length: 8 }).map((_, index) => (
               <div key={index} className="w-full">
                 <Skeleton height={200} />
                 <Skeleton

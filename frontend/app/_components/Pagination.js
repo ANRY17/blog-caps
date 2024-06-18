@@ -1,6 +1,6 @@
 export default function Pagination({ page, pageCount, onPageChange }) {
   return (
-    <div className="flex justify-center">
+    <div className="my-8 flex justify-center">
       {Array.from({ length: pageCount }, (_, index) => (
         <button
           key={index}

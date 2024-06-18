@@ -48,20 +48,16 @@ export default function Header() {
           : 'bg-black bg-opacity-50 text-white'
       }`}
     >
-      {/* Top Navigation */}
       <nav className="flex justify-between items-center w-full px-8 text-lg">
-        {/* Logo */}
-        <div className="text-2xl font-bold w-">
+        <div className="text-2xl font-bold">
           <Image
             src={logoLight}
             width={100}
-            height={100} // Sesuaikan dengan dimensi asli gambar
+            height={100}
             quality={60}
             alt="logo"
-            loading="lazy" // Aktifkan lazy loading
           />
         </div>
-        {/* Desktop Menu Items */}
         <ul
           className={`hidden md:flex space-x-8 ${
             isScrolled ? 'text-white' : 'text-white'
@@ -74,7 +70,7 @@ export default function Header() {
           </li>
           <li>
             <Link href="/blog" className="hover:underline">
-              Blog
+              Blogs
             </Link>
           </li>
           <li>
@@ -107,6 +103,7 @@ export default function Header() {
             </svg>
           </button>
         </div>
+
         {/* Profile/Login Button */}
         <div className="hidden md:block">
           {loading ? (
@@ -118,13 +115,21 @@ export default function Header() {
             />
           ) : isLoggedIn ? (
             <Link href="/profile">
-              <button className="px-4 py-2 bg-gray-800 bg-opacity-75 rounded">
+              <button
+                className={`px-4 py-2 rounded text-white ${
+                  isScrolled ? 'bg-blue-600' : 'bg-gray-800'
+                }`}
+              >
                 Profile
               </button>
             </Link>
           ) : (
             <Link href="/login">
-              <button className="px-4 py-2 bg-gray-800 bg-opacity-75 rounded">
+              <button
+                className={`px-4 py-2 rounded text-white ${
+                  isScrolled ? 'bg-blue-600' : 'bg-gray-800'
+                }`}
+              >
                 Login
               </button>
             </Link>
@@ -136,23 +141,23 @@ export default function Header() {
       {isMenuOpen && (
         <ul className="absolute top-16 right-4 bg-gray-800 text-white flex flex-col items-center md:hidden p-4 space-y-2 rounded-lg shadow-lg">
           <li>
-            <a href="#destinations" className="hover:underline">
-              Destinations
+            <a href="/home" className="hover:underline">
+              Home
             </a>
           </li>
           <li>
-            <a href="#activities" className="hover:underline">
-              Activities
+            <a href="#blog" className="hover:underline">
+              Blogs
             </a>
           </li>
           <li>
             <a href="#about" className="hover:underline">
-              About Us
+              Tags
             </a>
           </li>
           <li>
             <a href="#contact" className="hover:underline">
-              Contact
+              Search
             </a>
           </li>
           <li>
@@ -165,13 +170,13 @@ export default function Header() {
               />
             ) : isLoggedIn ? (
               <Link href="/profile">
-                <button className="px-4 py-2 bg-gray-700 rounded">
+                <button className="px-4 py-2 bg-blue-600 rounded">
                   Profile
                 </button>
               </Link>
             ) : (
               <Link href="/login">
-                <button className="px-4 py-2 bg-gray-700 rounded">Login</button>
+                <button className="px-4 py-2 bg-blue-600 rounded">Login</button>
               </Link>
             )}
           </li>
