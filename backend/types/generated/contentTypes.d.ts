@@ -383,7 +383,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       }>;
     content: Attribute.Blocks & Attribute.Required;
     slug: Attribute.UID<'api::post.post', 'title'> & Attribute.Required;
-    cover: Attribute.Media;
+    cover: Attribute.Media<'images', true>;
     tags: Attribute.Relation<'api::post.post', 'oneToMany', 'api::tag.tag'>;
     seo: Attribute.Component<'seo.seo-information'>;
     createdAt: Attribute.DateTime;
@@ -410,6 +410,7 @@ export interface ApiTagTag extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     slug: Attribute.UID<'api::tag.tag', 'name'> & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
@@ -845,199 +846,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginStrapiGoogleAuthGoogleCredential
-  extends Schema.SingleType {
-  collectionName: 'strapi-google-auth_google-credential';
-  info: {
-    displayName: 'Google Credentials';
-    singularName: 'google-credential';
-    pluralName: 'google-credentials';
-    description: 'Stores google project credentials';
-    tableName: 'google_auth_creds';
-  };
-  options: {
-    privateAttributes: ['id', 'created_at'];
-    populateCreatorFields: true;
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    google_client_id: Attribute.String & Attribute.Required;
-    google_client_secret: Attribute.String & Attribute.Required;
-    google_redirect_url: Attribute.String & Attribute.Required;
-    google_scopes: Attribute.JSON & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::strapi-google-auth.google-credential',
-      'oneToOne',
-      'admin::user'
-    >;
-    updatedBy: Attribute.Relation<
-      'plugin::strapi-google-auth.google-credential',
-      'oneToOne',
-      'admin::user'
-    >;
-  };
-}
-
-export interface PluginCommentManagerComment extends Schema.CollectionType {
-  collectionName: 'comments';
-  info: {
-    singularName: 'comment';
-    pluralName: 'comments';
-    displayName: 'Comment';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-    comment: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    content: Attribute.Text;
-    author: Attribute.Relation<
-      'plugin::comment-manager.comment',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    subcomments: Attribute.Relation<
-      'plugin::comment-manager.comment',
-      'oneToMany',
-      'plugin::comment-manager.subcomment'
-    >;
-    from_admin: Attribute.Boolean;
-    related_to: Attribute.Relation<
-      'plugin::comment-manager.comment',
-      'manyToOne',
-      'plugin::comment-manager.content-id'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::comment-manager.comment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::comment-manager.comment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginCommentManagerSubcomment extends Schema.CollectionType {
-  collectionName: 'subcomments';
-  info: {
-    singularName: 'subcomment';
-    pluralName: 'subcomments';
-    displayName: 'Subcomment';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-    comment: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    content: Attribute.Text;
-    author: Attribute.Relation<
-      'plugin::comment-manager.subcomment',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    parent_comment: Attribute.Relation<
-      'plugin::comment-manager.subcomment',
-      'manyToOne',
-      'plugin::comment-manager.comment'
-    >;
-    from_admin: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::comment-manager.subcomment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::comment-manager.subcomment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginCommentManagerContentId extends Schema.CollectionType {
-  collectionName: 'content_ids';
-  info: {
-    singularName: 'content-id';
-    pluralName: 'content-ids';
-    displayName: 'ContentID';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-    comment: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    slug: Attribute.String & Attribute.Unique;
-    comments: Attribute.Relation<
-      'plugin::comment-manager.content-id',
-      'oneToMany',
-      'plugin::comment-manager.comment'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::comment-manager.content-id',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::comment-manager.content-id',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginRatingsReview extends Schema.CollectionType {
   collectionName: 'reviews';
   info: {
@@ -1152,10 +960,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::strapi-google-auth.google-credential': PluginStrapiGoogleAuthGoogleCredential;
-      'plugin::comment-manager.comment': PluginCommentManagerComment;
-      'plugin::comment-manager.subcomment': PluginCommentManagerSubcomment;
-      'plugin::comment-manager.content-id': PluginCommentManagerContentId;
       'plugin::ratings.review': PluginRatingsReview;
       'plugin::ratings.r-content-id': PluginRatingsRContentId;
     }

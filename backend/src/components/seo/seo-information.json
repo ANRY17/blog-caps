@@ -1,8 +1,9 @@
 {
   "collectionName": "components_seo_seo_informations",
   "info": {
-    "displayName": "seoInformation",
-    "icon": "chartCircle"
+    "displayName": "SeoInformation",
+    "icon": "apps",
+    "description": ""
   },
   "options": {},
   "attributes": {

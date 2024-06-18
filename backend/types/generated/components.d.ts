@@ -3,8 +3,9 @@ import type { Schema, Attribute } from '@strapi/strapi';
 export interface SeoSeoInformation extends Schema.Component {
   collectionName: 'components_seo_seo_informations';
   info: {
-    displayName: 'seoInformation';
-    icon: 'chartCircle';
+    displayName: 'SeoInformation';
+    icon: 'apps';
+    description: '';
   };
   attributes: {
     seoTitle: Attribute.String;
