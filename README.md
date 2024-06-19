@@ -32,6 +32,11 @@ Buat file `.env.local` di root direktori frontend dan tambahkan konfigurasi yang
 ```plaintext
 NEXT_PUBLIC_API_URL=http://localhost:1337
 ```
+atau bisa copy `.env.local.example` dengan cara
+
+```bash
+cp .env.local.example .env.local
+```
 
 ### 3. Jalankan Server Development
 
