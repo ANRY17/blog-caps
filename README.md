@@ -16,45 +16,27 @@ git clone https://github.com/AZURA17/blog-caps.git
 cd blog-caps
 ```
 
-## Setup Frontend (Next.js)
-
-### 1. Install Dependencies
-
-```bash
-cd frontend
-yarn install
-```
-
-### 2. Konfigurasi Environment
-
-Buat file `.env.local` di root direktori frontend dan tambahkan konfigurasi yang diperlukan. Contoh konfigurasi:
-
-```plaintext
-NEXT_PUBLIC_API_URL=http://localhost:1337
-```
-
-### 3. Jalankan Server Development
-
-```bash
-yarn dev
-```
-
 ## Setup Backend (Strapi)
 
-### 1. Install Dependencies
+### 1. Masuk ke Direktori frontend
 
 ```bash
-cd backend
+cd blog-caps/fronted
+```
+
+### 2. Install Dependencies
+
+```bash
 yarn install
 ```
 
-### 2. setup environtment
+### 3. setup environtment
 
 ```bash
 cp .env.example .env
 ```
 
-### 3. buat folder uploads
+### 4. buat folder uploads
 
 pastikan directory saat ini sudah berada `/backend` :
 
@@ -62,15 +44,44 @@ pastikan directory saat ini sudah berada `/backend` :
 mkdir /backend/public/uploads
 ```
 
-### 4. Jalankan Server Development
+### 5. Jalankan Server Development
 
 ```bash
 yarn develop
 ```
 
-### 5. Buka Dashboard Admin Strapi
+### 6. Buka Dashboard Admin Strapi
 
 Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. Ikuti langkah-langkah setup awal untuk membuat akun admin dan konfigurasi awal lainnya.
+
+
+## Setup Frontend (Next.js)
+
+### 1. Masuk ke Direktori backend
+
+```bash
+cd blog-caps/backend
+```
+
+### 2. Install Dependencies
+
+```bash
+yarn install
+```
+
+### 3. Konfigurasi Environment
+
+Buat file `.env.local` di root direktori frontend dan tambahkan konfigurasi yang diperlukan. Contoh konfigurasi:
+
+```plaintext
+NEXT_PUBLIC_API_URL=http://localhost:1337
+```
+
+### 4. Jalankan Server Development
+
+```bash
+yarn dev
+```
 
 ## Deployment
 
