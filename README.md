@@ -1,6 +1,6 @@
-# Setup Proyek Next.js dan Strapi dengan MySQL
+# Setup Proyek Next.js dan Strapi dengan Sqlite
 
-Proyek ini berisi instruksi untuk menyiapkan proyek Next.js (frontend) dan Strapi (backend) dengan menggunakan database MySQL.
+Proyek ini berisi instruksi untuk menyiapkan proyek Next.js (frontend) dan Strapi (backend) dengan menggunakan database Sqlite.
 
 ## Setup Proyek Blog-Caps
 
@@ -53,20 +53,47 @@ cd backend
 yarn install
 ```
 
-### 2. Konfigurasi Database MySQL
+### 2. setup environtment
 
-1. Pastikan kamu memiliki server MySQL yang sudah berjalan.
-2. Buatlah database baru dengan nama `strapi` di server MySQL.
+```bash
+cp .env.example .env
+```
 
-### 3. Jalankan Server Strapi
+### 3. buat folder uploads
+
+pastikan directory saat ini sudah berada `/backend` :
+
+```bash
+mkdir /backend/public/uploads
+```
+
+### 4. Jalankan Server Development
 
 ```bash
 yarn develop
 ```
 
-### 4. Buka Dashboard Admin Strapi
+### 5. Buka Dashboard Admin Strapi
 
 Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. Ikuti langkah-langkah setup awal untuk membuat akun admin dan konfigurasi awal lainnya.
+
+## Deployment
+
+### 1. Link Frontend
+
+[Next.js](jejakwisata.site)
+
+### 2. Link Backend
+
+[Strapi](develop.jejakwisata.site)
+
+### 3. Public Email and Password Strapi
+
+**Email:** public@gmail.com
+
+**Password:** Public1234
+
+> **Catatan:** ini merupakah akun dengan roles author bukan editor maupun super admin
 
 ## Kontribusi
 
