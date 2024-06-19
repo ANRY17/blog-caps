@@ -81,11 +81,11 @@ Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. I
 
 ### 1. Link Frontend
 
-[Next.js](jejakwisata.site)
+[Next.js](https://jejakwisata.site)
 
 ### 2. Link Backend
 
-[Strapi](develop.jejakwisata.site)
+[Strapi](https://develop.jejakwisata.site)
 
 ### 3. Public Email and Password Strapi
 
