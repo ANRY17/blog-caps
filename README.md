@@ -31,10 +31,10 @@ npm install --global yarn
 
 ## Setup Backend (Strapi)
 
-### 1. Masuk ke Direktori frontend
+### 1. Masuk ke Direktori backend
 
 ```bash
-cd blog-caps/fronted
+cd blog-caps/backend
 ```
 
 ### 2. Install Dependencies
@@ -70,10 +70,10 @@ Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. I
 
 ## Setup Frontend (Next.js)
 
-### 1. Masuk ke Direktori backend
+### 1. Masuk ke Direktori frontend
 
 ```bash
-cd blog-caps/backend
+cd blog-caps/fronted
 ```
 
 ### 2. Install Dependencies
