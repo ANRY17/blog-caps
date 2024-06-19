@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import HeroSection from '@/app/_components/HeroSection';
 import ActivitiesSection from '@/app/_components/CategoriesSection';
 import AboutSection from '@/app/_components/AboutSection';
@@ -9,8 +10,13 @@ import island from '@/public/nusa.jpg';
 
 export default function Home() {
   const images = [{ src: mountain }, { src: beach }, { src: island }];
+
   return (
     <main className="min-h-screen">
+      <Head>
+        <meta name="dicoding:email" content="rizaldyasfin@gmail.com" />
+      </Head>
+
       <HeroSection images={images} />
       <ActivitiesSection />
       <AboutSection />
@@ -19,3 +25,4 @@ export default function Home() {
     </main>
   );
 }
+

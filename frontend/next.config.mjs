@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'backend.jejakwisata.site',
+        hostname: 'develop.jejakwisata.site',
         port: '',
         pathname: '/uploads/**',
       },

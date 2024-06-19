@@ -99,7 +99,7 @@ export default function CommentSection({ blogId }) {
   };
 
   return (
-    <div className="mb-6">
+    <div className="my-8">
       <h2 className="text-2xl font-semibold mb-4">
         Leave a Comment and Rating
       </h2>

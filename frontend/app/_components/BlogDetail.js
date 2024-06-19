@@ -5,9 +5,10 @@ import CommentSection from '@/app/_components/CommentSection';
 import SimilarPosts from '@/app/_components/SimilarPosts';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import BlockRendererClient from '@/app/_components/BlockRendererClient';
 
 export default function BlogDetail({ blogData }) {
-  const { id, title, content, cover, comments, tags, createdAt } = blogData;
+  const { id, title, cover, comments, tags, createdAt, content } = blogData;
 
   const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -18,7 +19,7 @@ export default function BlogDetail({ blogData }) {
   return (
     <main className="min-h-screen bg-gray-100">
       {cover ? (
-        <div className="relative w-full h-96 md:h-80 lg:h-96 mb-6 mx-auto overflow-hidden rounded-lg shadow-lg">
+        <div className="relative w-full h-custom-96 md:h-custom-128 mb-6 mx-auto overflow-hidden shadow-lg">
           <Image src={cover} alt={title} layout="fill" objectFit="cover" />
         </div>
       ) : (
@@ -49,22 +50,14 @@ export default function BlogDetail({ blogData }) {
 
           <div className="prose lg:prose-xl prose-gray mx-auto">
             {content?.length ? (
-              content.map((block, index) => (
-                <div key={index}>
-                  {block.children.map((child, childIndex) =>
-                    child.type === 'text' ? (
-                      <p key={childIndex}>{child.text}</p>
-                    ) : null
-                  )}
-                </div>
-              ))
+              <BlockRendererClient content={content} />
             ) : (
               <Skeleton count={5} />
             )}
           </div>
 
           {tags && tags.length > 1 && (
-            <div className="flex flex-wrap space-x-2 mt-6 mb-8">
+            <div className="flex flex-wrap space-x-2 mt-6">
               {tags.slice(1).map((tag, index) => (
                 <Link
                   key={index}
@@ -86,3 +79,4 @@ export default function BlogDetail({ blogData }) {
     </main>
   );
 }
+

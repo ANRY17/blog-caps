@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import { useState, useEffect, useRef } from 'react';
 import { getAllBlogs } from '@/app/_lib/api';
 import BlogCard from '@/app/_components/BlogCard';
@@ -6,10 +6,10 @@ import Pagination from '@/app/_components/Pagination';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export default function BlogClient({ initialBlogs, initialPagination }) {
+export default function BlogClient({ initialBlogs = [], initialPagination }) {
   const [blogs, setBlogs] = useState(initialBlogs);
   const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(initialPagination.pageCount);
+  const [pageCount, setPageCount] = useState(initialPagination?.pageCount || 1);
   const [loading, setLoading] = useState(false);
 
   const initialLoad = useRef(true);
@@ -28,10 +28,11 @@ export default function BlogClient({ initialBlogs, initialPagination }) {
       }
     };
 
-    if (!initialLoad.current) {
+    if (initialLoad.current) {
       fetchBlogs();
-    } else {
       initialLoad.current = false;
+    } else {
+      fetchBlogs();
     }
   }, [page]);
 
@@ -43,7 +44,7 @@ export default function BlogClient({ initialBlogs, initialPagination }) {
     <>
       <div className="container mx-auto py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {loading
-          ? Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 6 }).map((_, index) => (
               <div key={index} className="w-full">
                 <Skeleton height={200} />
                 <Skeleton
@@ -70,3 +71,4 @@ export default function BlogClient({ initialBlogs, initialPagination }) {
     </>
   );
 }
+
