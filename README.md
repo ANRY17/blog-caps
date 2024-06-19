@@ -16,6 +16,19 @@ git clone https://github.com/AZURA17/blog-caps.git
 cd blog-caps
 ```
 
+### 4. Pastikan di Komputer Anda Sudah Terinstall Node.js
+
+```bash
+node -v
+```
+
+### 4. Instalasi Yarn
+
+```bash
+npm install --global yarn
+```
+
+
 ## Setup Backend (Strapi)
 
 ### 1. Masuk ke Direktori frontend
