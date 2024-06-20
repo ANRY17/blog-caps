@@ -79,13 +79,13 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-### 5. Jalankan Server Development
+### 6. Jalankan Server Development
 
 ```bash
 yarn develop
 ```
 
-### 6. Buka Dashboard Admin Strapi
+### 7. Buka Dashboard Admin Strapi
 
 Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. Ikuti langkah-langkah setup awal untuk membuat akun admin dan konfigurasi awal lainnya.
 
