@@ -16,7 +16,7 @@ git clone https://github.com/AZURA17/blog-caps.git
 cd blog-caps
 ```
 
-### 4. Pastikan di Komputer Anda Sudah Terinstall Node.js
+### 3. Pastikan di Komputer Anda Sudah Terinstall Node.js
 
 ```bash
 node -v
@@ -57,35 +57,13 @@ pastikan directory saat ini sudah berada `/backend` :
 mkdir /backend/public/uploads
 ```
 
-### 5. Sesuaikan next.config.mjs Sesuai Kebutuhan
-
-Secara Default Configurasi Strapi Pada Next.Js Seperti Ini : 
-
-```bash
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
-      },
-    ],
-  },
-};
-
-export default nextConfig;
-```
-
-### 6. Jalankan Server Development
+### 5. Jalankan Server Development
 
 ```bash
 yarn develop
 ```
 
-### 7. Buka Dashboard Admin Strapi
+### 6. Buka Dashboard Admin Strapi
 
 Setelah server Strapi berjalan, buka `http://localhost:1337/admin` di browser. Ikuti langkah-langkah setup awal untuk membuat akun admin dan konfigurasi awal lainnya.
 
@@ -112,7 +90,29 @@ Buat file `.env.local` di root direktori frontend dan tambahkan konfigurasi yang
 NEXT_PUBLIC_API_URL=http://localhost:1337
 ```
 
-### 4. Jalankan Server Development
+### 4. Sesuaikan next.config.mjs Sesuai Kebutuhan
+
+Secara Default Configurasi Strapi Pada Next.Js Seperti Ini : 
+
+```bash
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
+};
+
+export default nextConfig;
+```
+
+### 5. Jalankan Server Development
 
 ```bash
 yarn dev
