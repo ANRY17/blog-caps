@@ -31,7 +31,7 @@ npm install --global yarn
 
 ## Setup Backend (Strapi)
 
-### 1. Masuk ke Direktori backend
+### 1. Masuk ke Direktori Backend
 
 ```bash
 cd blog-caps/backend
@@ -43,18 +43,40 @@ cd blog-caps/backend
 yarn install
 ```
 
-### 3. setup environtment
+### 3. Setup Environtment
 
 ```bash
 cp .env.example .env
 ```
 
-### 4. buat folder uploads
+### 4. Buat Folder Uploads
 
 pastikan directory saat ini sudah berada `/backend` :
 
 ```bash
 mkdir /backend/public/uploads
+```
+
+### 5. Sesuaikan next.config.mjs Sesuai Kebutuhan
+
+Secara Default Configurasi Strapi Pada Next.Js Seperti Ini : 
+
+```bash
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
+};
+
+export default nextConfig;
 ```
 
 ### 5. Jalankan Server Development
